@@ -1,0 +1,16 @@
+[tool.black]
+line-length = 88
+
+# Pylint configuration placed in pyproject.toml to centralize tooling settings.
+# Note: some pylint versions may not read pyproject.toml; keeping these settings
+# here documents the intended configuration and avoids duplication.
+
+[tool.pylint."MASTER"]
+ignore = ["__pycache__", "build", "dist", ".venv", "venv"]
+jobs = 1
+
+[tool.pylint.FORMAT]
+max-line-length = 88
+
+[tool.pylint."MESSAGES CONTROL"]
+disable = ["C0114", "C0115", "C0116"]
