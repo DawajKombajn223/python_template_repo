@@ -1,0 +1,1 @@
+Repozytorium na cele ćwiczeń na uniwersytecie WSB. 
