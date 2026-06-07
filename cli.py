@@ -1,13 +1,19 @@
 import argparse
-import sys
 from motivator.storage import add_message, get_random_message, load_messages
 
 DEFAULT_FILE = "messages.json"
 
 
 def main(argv=None):
-    parser = argparse.ArgumentParser(prog="motivator", description="Wyświetlacz motywacyjnych wiadomości")
-    parser.add_argument("--file", "-f", default=DEFAULT_FILE, help="Ścieżka do pliku z wiadomościami (JSON)")
+    parser = argparse.ArgumentParser(
+        prog="motivator", description="Wyświetlacz motywacyjnych wiadomości"
+    )
+    parser.add_argument(
+        "--file",
+        "-f",
+        default=DEFAULT_FILE,
+        help="Ścieżka do pliku z wiadomościami (JSON)",
+    )
 
     sub = parser.add_subparsers(dest="command")
 
@@ -15,7 +21,11 @@ def main(argv=None):
     sub.add_parser("list", help="Wypisz wszystkie wiadomości")
 
     add = sub.add_parser("add", help="Dodaj nową wiadomość")
-    add.add_argument("-m", "--message", help="Treść wiadomości. Bez podania, program zapyta interaktywnie.")
+    add.add_argument(
+        "-m",
+        "--message",
+        help="Treść wiadomości. Bez podania, program zapyta interaktywnie.",
+    )
 
     args = parser.parse_args(argv)
 
@@ -47,6 +57,9 @@ def main(argv=None):
         add_message(args.file, msg.strip())
         print("Dodano wiadomość.")
         return 0
+
+    # Fallback: return success code (shouldn't normally be reached)
+    return 0
 
 
 if __name__ == "__main__":
