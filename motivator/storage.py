@@ -35,10 +35,11 @@ def load_messages(path: str) -> List[str]:
         save_messages(path, DEFAULT_MESSAGES)
         return list(DEFAULT_MESSAGES)
     except (json.JSONDecodeError, IOError):
-        # Backup corrupted file and reset
+        # Backup corrupted file and reset. Only catch OSError when renaming
         try:
             os.rename(path, path + ".bak")
-        except Exception:
+        except OSError:
+            # If backup fails, we don't want to swallow unrelated exceptions.
             pass
         save_messages(path, DEFAULT_MESSAGES)
         return list(DEFAULT_MESSAGES)
